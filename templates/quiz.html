@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+  {% block content %}
+    <p>
+      <p>Chihuahua score: {{ score[0] }} </p>
+      <p>Poodle score: {{ score[1] }} </p>
+      
+      <form method="GET" action="{{ url_for("answer_get") }}">
+        <h12>{{ title }}</h2><br><br>
+        <input type="radio" id="option1" name="quiz_form" value="{{value1}}">
+        <label for="option1">{{q1}}</label><br>
+        <br>
+        <input type="radio" id="option2" name="quiz_form" value="{{value2}}">
+        <label for="option2">{{q2}}</label><br>
+        <br>
+        <button type="submit" name="quiz_button" value ="{{q_index}}">
+          Next
+        </button>
+        
+      </form
+    </p>
+  {% endblock %}

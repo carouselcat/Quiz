@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+       <title>Quiz</title>
+  </head>
+
+  <body>
+    <h1>Quiz</h1>
+    <p>
+      {% block content %}
+      <a href="{{ url_for('quiz_page') }}">Start</a>
+      {% endblock%}
+    </p>
+  </body>
+
+</html> 
