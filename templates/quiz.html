@@ -2,9 +2,6 @@
 
   {% block content %}
     <p>
-      <p>Chihuahua score: {{ score[0] }} </p>
-      <p>Poodle score: {{ score[1] }} </p>
-      
       <form method="GET" action="{{ url_for("answer_get") }}">
         <h12>{{ title }}</h2><br><br>
         <input type="radio" id="option1" name="quiz_form" value="{{value1}}">
