@@ -1,7 +1,19 @@
 import logging
 from flask import Flask, render_template, request
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
+img_arr = ["/static/pics/chihuahua1.jpg",
+           "/static/pics/poodle1.jpg",
+           "/static/pics/chihuahua2.jpg",
+           "/static/pics/poodle2.jpg",
+           "/static/pics/chihuahua3.jpg",
+           "/static/pics/poodle3.jpg"]
+
+start_img = "/static/pics/quiz-start.jpg"
+tie_result = "/static/pics/tie-result.jpg"
+poodle_result = "/static/pics/poodle-result.jpg"
+chihuahua_result = "/static/pics/chihuahua-result.jpg"
 
 results = [0,0]
 question = "test question"
@@ -15,6 +27,7 @@ def set_questions(q_index):
     
       if q_index == 0:
           question = "Which do you prefer?"
+          img_index = 1
           option1 = "Tea"
           val_1 = 1
         
@@ -95,7 +108,7 @@ val_2 = qpack[4]
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", start_pic = start_img)
 
 @app.route("/quiz/")
 def quiz_page(answered = False, result_index = None, quiz_index = 0):
@@ -106,6 +119,7 @@ def quiz_page(answered = False, result_index = None, quiz_index = 0):
     val_1 = qpack[2]
     option_2 = qpack[3]
     val_2 = qpack[4]
+    page_pic = img_arr[quiz_index]
 
     
     if(answered):
@@ -117,17 +131,19 @@ def quiz_page(answered = False, result_index = None, quiz_index = 0):
                            q2 = option_2,
                            value1 = val_1,
                            value2 = val_2,
-                           q_index = quiz_index)
+                           q_index = quiz_index,
+                           page_img = page_pic)
 
 @app.route("/quiz_result/")
-def quiz_result(final_result):
-    return render_template("result.html", f_result = final_result)
+def quiz_result(final_result, result_pic):
+    return render_template("result.html", f_result = final_result, result_p = result_pic)
 
 @app.get("/answer_get/")
 def answer_get():
     quiz_index = int(request.args['quiz_button'])
     quiz_index += 1
     num = int(request.args['quiz_form'])
+    result_pic = ""
     if(quiz_index < 6):
         return quiz_page(True,int(num),quiz_index)
     else:
@@ -136,14 +152,17 @@ def answer_get():
         
         if results[0] > results[1]:
             final_result = "Chihuahua"
+            result_pic = chihuahua_result
         elif results[0] < results[1]:
             final_result = "Poodle"
+            result_pic = poodle_result
         elif results[0] == results[1]:
             final_result = "Tie! You are part Poodle part Chihuahua"
+            result_pic = tie_result
         else:
             final_result - "Error"
         
-        return quiz_result(final_result)
+        return quiz_result(final_result,result_pic)
 
 if __name__ == '__main__':
     app.run()

@@ -2,15 +2,21 @@
 <html>
   <head>
        <title>Quiz</title>
+       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   </head>
 
   <body>
+  <div id="container">
+    <div id="quizbox">
     <h1>Quiz</h1>
     <p>
       {% block content %}
+      <img src="{{ start_pic }}" width="300"/> <br></br>
       <a href="{{ url_for('quiz_page') }}">Start</a>
       {% endblock%}
     </p>
+    </div>
+  </div>
   </body>
 
 </html> 

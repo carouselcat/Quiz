@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #212529;
+    background-color: #cdeeff;
+}
+
+h1 {
+    color: #da5d5d;
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    border-bottom: 2px solid #0056b3;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #495057;
+}
+
+#container {
+       text-align: center;
+       box-sizing: border-box;
+}
+
+
+#quizbox {
+       margin: auto;
+       width: 50%;
+       min-height: 600px;
+       padding: 10px;
+       text-align: center;
+       box-sizing: border-box;
+       background-color: #e97bdf;
+}
+
+.test {
+        padding: 20px;   
+}
+
